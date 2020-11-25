@@ -1,11 +1,15 @@
-const divs = document.querySelectorAll('div');
+const nav = document.querySelector('#main');
+let topNav = nav.offsetTop;
 
-function logText(e) {
-	console.log(this.classList.value);
-	e.stopPropagation();
-}
+function fixNav() {
+	if(window.scrollY >= topNav){
+		document.body.style.paddingTop = nav.offsetHeight + 'px';
+		document.body.classList.add('fixed-nav');
+	} else {
+		
+		document.body.classList.remove('fixed-nav');
+		document.body.style.paddingTop = 0;
+	}
+};
 
-divs.forEach(div=> div.addEventListener('click', logText, {
-	capture: false,
-	once: true
-}));
+window.addEventListener('scroll', fixNav);
